@@ -76,7 +76,7 @@ export default class Image extends Component {
     aspectRatio: PropTypes.number,
 
     /**
-     * The quality of image to retreive from 0 to 100
+     * The quality of image to retrieve from 0 to 100
      */
     quality: PropTypes.number,
 
@@ -172,7 +172,7 @@ export default class Image extends Component {
 
     contain = contain || aspectRatio
 
-    // Overiding `src` prop if `quality` was set
+    // Overriding `src` prop if `quality` was set
     src = this.getOptimizedSrc()
 
     if (primaryNotFound && notFoundSrc) {
@@ -259,6 +259,10 @@ export default class Image extends Component {
 
   getOptimizedSrc() {
     const { src, quality, optimize } = this.props
+    return Image.getOptimizedSrc(src, quality, optimize)
+  }
+
+  static getOptimizedSrc(src, quality, optimize = {}) {
     const options = { ...optimize }
     if (quality) options.quality = quality
     return createOptimizedSrc(src, options)

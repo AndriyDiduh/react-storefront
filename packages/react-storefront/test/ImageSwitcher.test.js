@@ -4,6 +4,8 @@
  */
 import React from 'react'
 import { mount } from 'enzyme'
+import ReactImageMagnify from 'react-image-magnify'
+import Image from '../src/Image'
 import ImageSwitcher from '../src/ImageSwitcher'
 import Provider from './TestProvider'
 import AppModelBase from '../src/model/AppModelBase'
@@ -30,6 +32,48 @@ describe('ImageSwitcher', () => {
           <ImageSwitcher
             images={['/a.jpg', '/b.jpg', '/c.jpg']}
             thumbnails={['/at.jpg', '/bt.jpg', '/ct.jpg']}
+          />
+        </Provider>
+      )
+    ).toMatchSnapshot()
+  })
+
+  it('should render thumbnails on top', () => {
+    expect(
+      mount(
+        <Provider>
+          <ImageSwitcher
+            images={['/a.jpg', '/b.jpg', '/c.jpg']}
+            thumbnails={['/at.jpg', '/bt.jpg', '/ct.jpg']}
+            thumbnailPosition="top"
+          />
+        </Provider>
+      )
+    ).toMatchSnapshot()
+  })
+
+  it('should render thumbnails on the left', () => {
+    expect(
+      mount(
+        <Provider>
+          <ImageSwitcher
+            images={['/a.jpg', '/b.jpg', '/c.jpg']}
+            thumbnails={['/at.jpg', '/bt.jpg', '/ct.jpg']}
+            thumbnailPosition="left"
+          />
+        </Provider>
+      )
+    ).toMatchSnapshot()
+  })
+
+  it('should render thumbnails on the right', () => {
+    expect(
+      mount(
+        <Provider>
+          <ImageSwitcher
+            images={['/a.jpg', '/b.jpg', '/c.jpg']}
+            thumbnails={['/at.jpg', '/bt.jpg', '/ct.jpg']}
+            thumbnailPosition="right"
           />
         </Provider>
       )
@@ -202,6 +246,32 @@ describe('ImageSwitcher', () => {
     ).toMatch(/opt\.moovweb/)
   })
 
+  it('accepts imageProps when pan + zoom is enabled', () => {
+    const wrapper = mount(
+      <TestProvider>
+        <ImageSwitcher
+          images={[
+            {
+              src: 'test.jpg',
+              alt: 'test',
+              zoomSrc: 'testZoom.jpg',
+              zoomWidth: 1000,
+              zoomHeight: 1000
+            }
+          ]}
+          selectedIndex={0}
+          imageProps={{ quality: 50 }}
+        />
+      </TestProvider>
+    )
+    expect(
+      wrapper
+        .find('img')
+        .at(0)
+        .prop('src')
+    ).toMatch(/opt\.moovweb/)
+  })
+
   it('uses the product name as the alt prop when no alt is provided', () => {
     const wrapper = mount(
       <TestProvider>
@@ -339,5 +409,79 @@ describe('ImageSwitcher', () => {
     )
 
     expect(wrapper.find('ReactPinchZoomPan img[src="test-zoom.jpg"]')).toHaveLength(1)
+  })
+
+  it('should render ReactImageMagnify if all zoom props are passed', () => {
+    const wrapper = mount(
+      <TestProvider>
+        <ImageSwitcher
+          product={{
+            name: 'Red Shirt',
+            images: [
+              { src: 'test.jpg', zoomSrc: 'test-zoom.jpg', zoomWidth: 1000, zoomHeight: 1000 }
+            ]
+          }}
+        />
+      </TestProvider>
+    )
+
+    expect(wrapper.exists(ReactImageMagnify)).toBe(true)
+  })
+
+  it('should honor imageProps in ReactImageMagnify if all zoom props are passed', () => {
+    const wrapper = mount(
+      <TestProvider>
+        <ImageSwitcher
+          product={{
+            name: 'Red Shirt',
+            images: [
+              {
+                src: 'test.jpg',
+                zoomSrc: 'test-zoom.jpg',
+                zoomWidth: 1000,
+                zoomHeight: 1000
+              }
+            ]
+          }}
+          imageProps={{ quality: 50 }}
+        />
+      </TestProvider>
+    )
+
+    expect(
+      wrapper
+        .find('img')
+        .at(0)
+        .prop('src')
+    ).toMatch(/opt\.moovweb/)
+  })
+
+  it('should use the not found image in ReactImageMagnify when the primary src fails', done => {
+    const wrapper = mount(
+      <TestProvider>
+        <ImageSwitcher
+          notFoundSrc="/bar.png"
+          product={{
+            name: 'Red Shirt',
+            images: [
+              {
+                src: 'foo.png',
+                zoomSrc: 'test-zoom.jpg',
+                zoomWidth: 1000,
+                zoomHeight: 1000
+              }
+            ]
+          }}
+        />
+      </TestProvider>
+    )
+
+    const image = wrapper.find('ImageMagnify')
+
+    image.setState({ primaryNotFound: true }, () => {
+      const img = wrapper.find('img').first()
+      expect(img.prop('src')).toBe('/bar.png')
+      done()
+    })
   })
 })

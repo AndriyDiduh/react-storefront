@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.82.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.81.1...v6.82.0)
+
+- Add `ReactImageMagnify` to carousels, to allow images to be magnified on hover on PDPs
+
 ### 6.81.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.81.0...v6.81.1)
 
 - Fixed `prevButtonProps` and `nextButtonProps` not being passed to `Carousel` render.

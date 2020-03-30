@@ -13,7 +13,7 @@ describe('TabsRow', () => {
               { imageUrl: 'https://example.com' },
               { imageUrl: 'https://example.com' }
             ]}
-          />          
+          />
         </TestProvider>
       )).toMatchSnapshot()
     })
@@ -25,7 +25,7 @@ describe('TabsRow', () => {
               { text: 'Tab 1' },
               { text: 'Tab 2' }
             ]}
-          />          
+          />
         </TestProvider>
       )).toMatchSnapshot()
     })
@@ -37,7 +37,20 @@ describe('TabsRow', () => {
               { text: 'Tab 1', url: 'https://www.example.com' },
               { text: 'Tab 2', url: 'https://www.example.com' }
             ]}
-          />          
+          />
+        </TestProvider>
+      )).toMatchSnapshot()
+    })
+    it('should render tabs vertically', () => {
+      expect(mount(
+        <TestProvider>
+          <TabsRow
+            items={[
+              { text: 'Tab 1' },
+              { text: 'Tab 2' }
+            ]}
+            orientation="vertical"
+          />
         </TestProvider>
       )).toMatchSnapshot()
     })
@@ -49,7 +62,7 @@ describe('TabsRow', () => {
               { text: 'Tab 1', url: 'https://www.example.com' },
               { text: 'Tab 2', url: 'https://www.example.com' }
             ]}
-          />          
+          />
         </TestProvider>
       )).toMatchSnapshot()
     })

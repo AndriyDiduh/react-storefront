@@ -21,6 +21,16 @@ export default types.model('MediaType', {
    */
   zoomSrc: types.maybeNull(types.string),
   /**
+   * The width for the high resolution image displayed in the lightbox. This
+   * property is required for the hover-to-zoom functionality to work on the PDP.
+   */
+  zoomWidth: types.maybeNull(types.number),
+  /**
+   * The height for the high resolution image displayed in the lightbox. This
+   * property is required for the hover-to-zoom functionality to work on the PDP.
+   */
+  zoomHeight: types.maybeNull(types.number),
+  /**
    * Alt text for the image
    */
   alt: types.maybeNull(types.string),
