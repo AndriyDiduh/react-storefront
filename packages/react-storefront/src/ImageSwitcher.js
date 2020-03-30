@@ -2,9 +2,10 @@
  * @license
  * Copyright © 2017-2018 Moov Corporation.  All rights reserved.
  */
-import React, { Component, createRef } from 'react'
+import React, { Fragment, Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import SwipeableViews from 'react-swipeable-views'
+import { autoPlay, virtualize } from 'react-swipeable-views-utils'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
@@ -24,6 +25,15 @@ import Video from './Video'
 import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
 import set from 'lodash/set'
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+const VirtualizeSwipeableViews = virtualize(SwipeableViews)
+const AutoPlayVirtualizeSwipeableViews = autoPlay(VirtualizeSwipeableViews)
+
+function mod(n, m) {
+  const q = n % m
+  return q < 0 ? q + m : q
+}
 
 const paletteIconTextColor = '#77726D'
 
@@ -58,7 +68,7 @@ export const styles = theme => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
     '& img.rsf-imageSwitcherImage': {
       maxHeight: '100%',
       maxWidth: '100%',
@@ -378,7 +388,47 @@ export default class ImageSwitcher extends Component {
      * are changed.  This behavior is automatically adopted when the `product`
      * prop is specified.
      */
-    resetSelectionWhenImagesChange: PropTypes.bool
+    resetSelectionWhenImagesChange: PropTypes.bool,
+
+    /**
+     * If false, the auto play behavior is disabled
+     */
+    autoplay: PropTypes.bool,
+
+    /**
+     * This is the auto play direction
+     */
+    direction: PropTypes.string,
+
+    /**
+     * Delay between auto play transitions (in ms)
+     */
+    interval: PropTypes.number,
+
+    /**
+     * If true, scrolling past the last slide will cycle back to the first
+     */
+    infinite: PropTypes.bool,
+
+    /**
+     * Amount of pixels to pad the slide container
+     */
+    inset: PropTypes.number,
+
+    /**
+     * If infinite is enabled, the number of slides to show for each index
+     */
+    slidesToShow: PropTypes.number,
+
+    /**
+     * Amount of pixels of spacing between each slide
+     */
+    slideSpacing: PropTypes.number,
+
+    /**
+     * Additional props to be passed on to the react-swipeable-views component
+     */
+    swipeableViewsProps: PropTypes.object
   }
 
   static defaultProps = {
@@ -392,7 +442,15 @@ export default class ImageSwitcher extends Component {
     imageProps: {},
     reactPinchZoomPanOptions: {
       maxScale: 3
-    }
+    },
+    autoplay: false,
+    direction: 'incremental',
+    interval: 3000,
+    infinite: false,
+    slidesToShow: 1,
+    inset: 0,
+    slideSpacing: 0,
+    swipeabeViewsProps: {}
   }
 
   state = {
@@ -402,11 +460,13 @@ export default class ImageSwitcher extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    const images = normalizeImages(nextProps, 'images')
     const nextState = {
-      images: normalizeImages(nextProps, 'images'),
+      images,
       thumbnails: normalizeImages(nextProps, 'thumbnails'),
       selectedIndex:
-        nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0
+        nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0,
+      maxIndex: Math.ceil(images.length / nextProps.slidesToShow)
     }
 
     if (!prevState.images || !isEqual(nextState.images, prevState.images)) {
@@ -458,9 +518,14 @@ export default class ImageSwitcher extends Component {
     this.setState({ viewerActive: !this.state.viewerActive })
   }
 
+  getSelectedIndex = () => {
+    const { selectedIndex, maxIndex } = this.state
+    return mod(selectedIndex, maxIndex)
+  }
+
   renderDot(index) {
     const classes = classnames(this.props.classes.dot, {
-      [this.props.classes.dotSelected]: index === this.state.selectedIndex
+      [this.props.classes.dotSelected]: index === this.getSelectedIndex()
     })
     return <div key={index} className={classes} />
   }
@@ -475,7 +540,7 @@ export default class ImageSwitcher extends Component {
     } = this.props
     const { thumbnails } = this.state
     const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: src, alt }))
-    const { viewerActive, selectedIndex } = this.state
+    const { viewerActive } = this.state
     const isVertical = ['left', 'right'].includes(thumbnailPosition)
 
     return (
@@ -515,8 +580,8 @@ export default class ImageSwitcher extends Component {
               ...thumbnailImageProps
             }}
             centered
+            initialSelectedIdx={this.getSelectedIndex()}
             orientation={!viewerActive && isVertical ? 'vertical' : 'horizontal'}
-            initialSelectedIdx={selectedIndex}
             onTabChange={(e, selectedIndex) =>
               this.setState({ selectedIndex, playingVideo: false })
             }
@@ -541,6 +606,59 @@ export default class ImageSwitcher extends Component {
     }
   }
 
+  renderSlide = ({ style, index, src, alt, video, poster, zoomSrc, zoomWidth, zoomHeight }) => {
+    const { notFoundSrc, imageProps, classes, magnifyProps } = this.props
+    const imageOnLoad = idx => (idx === 0 ? this.onFullSizeImagesLoaded : () => {})
+    return (
+      <div key={index} style={style} className={classes.imageWrap}>
+        {video ? (
+          <Video src={src} alt={alt} poster={poster} />
+        ) : zoomSrc && zoomWidth && zoomHeight ? (
+          <ImageMagnify
+            magnifyProps={magnifyProps}
+            imageProps={imageProps}
+            src={src}
+            alt={alt}
+            notFoundSrc={notFoundSrc}
+            zoomSrc={zoomSrc}
+            zoomWidth={zoomWidth}
+            zoomHeight={zoomHeight}
+            onLoad={imageOnLoad(index)}
+          />
+        ) : (
+          <Image
+            notFoundSrc={notFoundSrc}
+            src={src}
+            alt={alt}
+            onLoad={imageOnLoad(index)}
+            contain
+            {...imageProps}
+          />
+        )}
+      </div>
+    )
+  }
+
+  slideRenderer = ({ key, index }) => {
+    const { slidesToShow } = this.props
+    const { images, maxIndex } = this.state
+    const slideCount = images.length
+
+    let baseindex = mod(index, maxIndex) * slidesToShow
+    baseindex = baseindex + slidesToShow >= slideCount ? slideCount - slidesToShow : baseindex
+    let slide = []
+    for (let i = 0; i < slidesToShow; i++) {
+      slide.push(
+        this.renderSlide({
+          index: i,
+          ...images[baseindex + i]
+        })
+      )
+    }
+
+    return <Fragment key={key}>{slide}</Fragment>
+  }
+
   render() {
     let {
       app,
@@ -552,9 +670,15 @@ export default class ImageSwitcher extends Component {
       style,
       reactPinchZoomPanOptions,
       loadingThumbnailProps,
-      imageProps,
       viewerThumbnailsOnly,
-      notFoundSrc,
+      inset,
+      autoplay,
+      interval,
+      direction,
+      infinite,
+      slidesToShow,
+      slideSpacing,
+      swipeableViewsProps,
       magnifyProps,
       thumbnailPosition
     } = this.props
@@ -582,8 +706,8 @@ export default class ImageSwitcher extends Component {
       )
     }
 
-    const { selectedIndex, viewerActive } = this.state
-    const selectedImage = images[selectedIndex]
+    const { viewerActive } = this.state
+    const selectedImage = images[this.getSelectedIndex()]
     const SelectedImageTag = selectedImage.video ? 'video' : 'img'
     magnifyProps = magnifyProps || {}
     set(
@@ -597,7 +721,32 @@ export default class ImageSwitcher extends Component {
       height: '100%'
     })
 
-    const imageOnLoad = idx => (idx === 0 ? this.onFullSizeImagesLoaded : () => {})
+    let Tag = infinite ? VirtualizeSwipeableViews : SwipeableViews
+    Tag = autoplay ? AutoPlaySwipeableViews : Tag
+    Tag = infinite && autoplay ? AutoPlayVirtualizeSwipeableViews : Tag
+
+    const tagProps = {
+      index: this.getSelectedIndex(),
+      direction,
+      interval,
+      onChangeIndex: i => this.setState({ selectedIndex: i }),
+      slideStyle: {
+        padding: `0 ${slideSpacing}px`,
+        overflow: 'hidden'
+      },
+      style: {
+        padding: `0 ${inset}px`
+      },
+      ...swipeableViewsProps
+    }
+
+    if (infinite) {
+      tagProps.slideRenderer = this.slideRenderer
+    } else {
+      tagProps.children = images.map((image, i) => this.renderSlide({ ...image, index: i }))
+    }
+
+    const slideCount = images.length
 
     return (
       <div
@@ -608,54 +757,21 @@ export default class ImageSwitcher extends Component {
       >
         {/* Full Size Images */}
         <div className={classes.swipeWrap}>
-          <SwipeableViews
-            index={selectedIndex}
-            onChangeIndex={i => this.setState({ selectedIndex: i })}
-          >
-            {images.map(({ src, alt, video, poster, zoomSrc, zoomWidth, zoomHeight }, i) => (
-              <div key={i} className={classes.imageWrap}>
-                {video ? (
-                  <Video src={src} alt={alt} poster={poster} />
-                ) : zoomSrc && zoomWidth && zoomHeight ? (
-                  <ImageMagnify
-                    magnifyProps={magnifyProps}
-                    imageProps={imageProps}
-                    src={src}
-                    alt={alt}
-                    notFoundSrc={notFoundSrc}
-                    zoomSrc={zoomSrc}
-                    zoomWidth={zoomWidth}
-                    zoomHeight={zoomHeight}
-                    onLoad={imageOnLoad(i)}
-                  />
-                ) : (
-                  <Image
-                    notFoundSrc={notFoundSrc}
-                    src={src}
-                    alt={alt}
-                    onLoad={imageOnLoad(i)}
-                    contain
-                    {...imageProps}
-                  />
-                )}
-              </div>
-            ))}
-          </SwipeableViews>
-
-          {arrows && (
+          <Tag {...tagProps} />
+          {arrows && slideCount > slidesToShow && (
             <div className={classes.arrows}>
-              {selectedIndex !== 0 && (
+              {(this.state.selectedIndex !== 0 || infinite) && (
                 <IconButton
                   className={classnames(classes.arrow, classes.leftArrow)}
-                  onClick={() => this.setState({ selectedIndex: selectedIndex - 1 })}
+                  onClick={() => this.setState({ selectedIndex: this.state.selectedIndex - 1 })}
                 >
                   <ChevronLeft classes={{ root: classes.icon }} />
                 </IconButton>
               )}
-              {selectedIndex !== images.length - 1 && (
+              {(this.state.selectedIndex !== slideCount - 1 || infinite) && (
                 <IconButton
                   className={classnames(classes.arrow, classes.rightArrow)}
-                  onClick={() => this.setState({ selectedIndex: selectedIndex + 1 })}
+                  onClick={() => this.setState({ selectedIndex: this.state.selectedIndex + 1 })}
                 >
                   <ChevronRight classes={{ root: classes.icon }} />
                 </IconButton>
@@ -663,8 +779,12 @@ export default class ImageSwitcher extends Component {
             </div>
           )}
 
-          {indicators && (
-            <div className={classes.dots}>{images.map((_, index) => this.renderDot(index))}</div>
+          {indicators && slideCount > slidesToShow && (
+            <div className={classes.dots}>
+              {Array(Math.ceil(slideCount / slidesToShow))
+                .fill(0)
+                .map((_, index) => this.renderDot(index))}
+            </div>
           )}
 
           {product && <LoadMask show={product.loadingImages} className={classes.mask} />}

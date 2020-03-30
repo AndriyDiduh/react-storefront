@@ -6,14 +6,14 @@ exports[`ImageSwitcher only shows images by default, no bells and whistles 1`] =
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}}>
         <inject-ImageSwitcher-with-app images={{...}} classes={{...}}>
-          <ImageSwitcher images={{...}} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-1" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-2">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-3">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-3">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -111,7 +111,7 @@ exports[`ImageSwitcher should render AmpImageSwitcher when amp=true 1`] = `
             </amp-state>
             <WithStyles(inject-ImageSwitcher-with-app) product={{...}} images={{...}}>
               <inject-ImageSwitcher-with-app product={{...}} images={{...}} classes={{...}}>
-                <ImageSwitcher product={{...}} images={{...}} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+                <ImageSwitcher product={{...}} images={{...}} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
                   <WithStyles(inject-AmpImageSwitcher-with-nextId-ampStateId-app) product={{...}} images={{...}} className={[undefined]} classes={{...}} arrows={true} indicators={false} thumbnails={{...}} thumbnailPosition="bottom">
                     <inject-AmpImageSwitcher-with-nextId-ampStateId-app product={{...}} images={{...}} className={[undefined]} arrows={true} indicators={false} thumbnails={{...}} thumbnailPosition="bottom" classes={{...}}>
                       <AmpImageSwitcher product={{...}} images={{...}} className={[undefined]} arrows={true} indicators={false} thumbnails={{...}} thumbnailPosition="bottom" classes={{...}} nextId={[Function: nextId]} ampStateId="moovAmpState" app={{...}} type="slides" ampStateProperty="selectedImage">
@@ -200,7 +200,7 @@ exports[`ImageSwitcher should render AmpImageSwitcher without product colors 1`]
             </amp-state>
             <WithStyles(inject-ImageSwitcher-with-app) product={{...}} images={{...}}>
               <inject-ImageSwitcher-with-app product={{...}} images={{...}} classes={{...}}>
-                <ImageSwitcher product={{...}} images={{...}} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+                <ImageSwitcher product={{...}} images={{...}} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
                   <WithStyles(inject-AmpImageSwitcher-with-nextId-ampStateId-app) product={{...}} images={{...}} className={[undefined]} classes={{...}} arrows={true} indicators={false} thumbnails={{...}} thumbnailPosition="bottom">
                     <inject-AmpImageSwitcher-with-nextId-ampStateId-app product={{...}} images={{...}} className={[undefined]} arrows={true} indicators={false} thumbnails={{...}} thumbnailPosition="bottom" classes={{...}}>
                       <AmpImageSwitcher product={{...}} images={{...}} className={[undefined]} arrows={true} indicators={false} thumbnails={{...}} thumbnailPosition="bottom" classes={{...}} nextId={[Function: nextId]} ampStateId="moovAmpState" app={{...}} type="slides" ampStateProperty="selectedImage">
@@ -278,14 +278,14 @@ exports[`ImageSwitcher should render arrows 1`] = `
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}} arrows={true}>
         <inject-ImageSwitcher-with-app images={{...}} arrows={true} classes={{...}}>
-          <ImageSwitcher images={{...}} arrows={true} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} arrows={true} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-461" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-462">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-463">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-463">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -372,14 +372,14 @@ exports[`ImageSwitcher should render indicator dots 1`] = `
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}} showIndicators={true}>
         <inject-ImageSwitcher-with-app images={{...}} showIndicators={true} classes={{...}}>
-          <ImageSwitcher images={{...}} showIndicators={true} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} showIndicators={true} classes={{...}} app={{...}} thumbnails={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-525" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-526">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-527">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-527">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -466,14 +466,14 @@ exports[`ImageSwitcher should render thumbnails 1`] = `
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}} thumbnails={{...}}>
         <inject-ImageSwitcher-with-app images={{...}} thumbnails={{...}} classes={{...}}>
-          <ImageSwitcher images={{...}} thumbnails={{...}} classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} thumbnails={{...}} classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} thumbnailPosition="bottom" imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-65" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-66">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-67">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-67">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -549,9 +549,9 @@ exports[`ImageSwitcher should render thumbnails 1`] = `
                 <div className="field">
                   <label className="RSFImageSwitcher-thumbsTitle-68" />
                 </div>
-                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} orientation="horizontal" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}}>
-                  <inject-TabsRow-with-app imageProps={{...}} centered={true} orientation="horizontal" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
-                    <TabsRow imageProps={{...}} centered={true} orientation="horizontal" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
+                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="horizontal" onTabChange={[Function: onTabChange]} items={{...}}>
+                  <inject-TabsRow-with-app imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="horizontal" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
+                    <TabsRow imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="horizontal" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
                       <WithStyles(Tabs) value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-125 RSFImageSwitcher-tabsRowRoot-94" classes={{...}}>
                         <Tabs value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-125 RSFImageSwitcher-tabsRowRoot-94" theme={{...}} classes={{...}} centered={false} component="div" fullWidth={false} scrollable={false} ScrollButtonComponent={[Function: WithStyles]} scrollButtons="auto" textColor="inherit">
                           <div className="MuiTabs-root-133 RSFTabsRow-root-125 RSFImageSwitcher-tabsRowRoot-94 RSFTabsRow-root-125 RSFImageSwitcher-tabsRowRoot-94" variant="scrollable">
@@ -679,14 +679,14 @@ exports[`ImageSwitcher should render thumbnails on the left 1`] = `
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}} thumbnails={{...}} thumbnailPosition="left">
         <inject-ImageSwitcher-with-app images={{...}} thumbnails={{...}} thumbnailPosition="left" classes={{...}}>
-          <ImageSwitcher images={{...}} thumbnails={{...}} thumbnailPosition="left" classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} thumbnails={{...}} thumbnailPosition="left" classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-263 RSFImageSwitcher-sideThumbs-272" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-264">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-265">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-265">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -762,9 +762,9 @@ exports[`ImageSwitcher should render thumbnails on the left 1`] = `
                 <div className="field">
                   <label className="RSFImageSwitcher-thumbsTitle-266" />
                 </div>
-                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} orientation="vertical" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}}>
-                  <inject-TabsRow-with-app imageProps={{...}} centered={true} orientation="vertical" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
-                    <TabsRow imageProps={{...}} centered={true} orientation="vertical" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
+                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="vertical" onTabChange={[Function: onTabChange]} items={{...}}>
+                  <inject-TabsRow-with-app imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="vertical" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
+                    <TabsRow imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="vertical" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
                       <WithStyles(Tabs) value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-323 RSFImageSwitcher-tabsRowRoot-292 RSFImageSwitcher-sideThumbTabs-273" classes={{...}}>
                         <Tabs value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-323 RSFImageSwitcher-tabsRowRoot-292 RSFImageSwitcher-sideThumbTabs-273" theme={{...}} classes={{...}} centered={false} component="div" fullWidth={false} scrollable={false} ScrollButtonComponent={[Function: WithStyles]} scrollButtons="auto" textColor="inherit">
                           <div className="MuiTabs-root-331 RSFTabsRow-root-323 RSFImageSwitcher-tabsRowRoot-292 RSFImageSwitcher-sideThumbTabs-273 RSFTabsRow-root-323 RSFImageSwitcher-tabsRowRoot-292 RSFImageSwitcher-sideThumbTabs-273" variant="scrollable">
@@ -892,14 +892,14 @@ exports[`ImageSwitcher should render thumbnails on the right 1`] = `
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}} thumbnails={{...}} thumbnailPosition="right">
         <inject-ImageSwitcher-with-app images={{...}} thumbnails={{...}} thumbnailPosition="right" classes={{...}}>
-          <ImageSwitcher images={{...}} thumbnails={{...}} thumbnailPosition="right" classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} thumbnails={{...}} thumbnailPosition="right" classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-362 RSFImageSwitcher-sideThumbs-371" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-363">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-364">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-364">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -975,9 +975,9 @@ exports[`ImageSwitcher should render thumbnails on the right 1`] = `
                 <div className="field">
                   <label className="RSFImageSwitcher-thumbsTitle-365" />
                 </div>
-                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} orientation="vertical" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}}>
-                  <inject-TabsRow-with-app imageProps={{...}} centered={true} orientation="vertical" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
-                    <TabsRow imageProps={{...}} centered={true} orientation="vertical" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
+                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="vertical" onTabChange={[Function: onTabChange]} items={{...}}>
+                  <inject-TabsRow-with-app imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="vertical" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
+                    <TabsRow imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="vertical" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
                       <WithStyles(Tabs) value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-422 RSFImageSwitcher-tabsRowRoot-391 RSFImageSwitcher-sideThumbTabs-372" classes={{...}}>
                         <Tabs value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-422 RSFImageSwitcher-tabsRowRoot-391 RSFImageSwitcher-sideThumbTabs-372" theme={{...}} classes={{...}} centered={false} component="div" fullWidth={false} scrollable={false} ScrollButtonComponent={[Function: WithStyles]} scrollButtons="auto" textColor="inherit">
                           <div className="MuiTabs-root-430 RSFTabsRow-root-422 RSFImageSwitcher-tabsRowRoot-391 RSFImageSwitcher-sideThumbTabs-372 RSFTabsRow-root-422 RSFImageSwitcher-tabsRowRoot-391 RSFImageSwitcher-sideThumbTabs-372" variant="scrollable">
@@ -1105,14 +1105,14 @@ exports[`ImageSwitcher should render thumbnails on top 1`] = `
     <MuiThemeProviderOld theme={{...}}>
       <WithStyles(inject-ImageSwitcher-with-app) images={{...}} thumbnails={{...}} thumbnailPosition="top">
         <inject-ImageSwitcher-with-app images={{...}} thumbnails={{...}} thumbnailPosition="top" classes={{...}}>
-          <ImageSwitcher images={{...}} thumbnails={{...}} thumbnailPosition="top" classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} imageProps={{...}} reactPinchZoomPanOptions={{...}}>
+          <ImageSwitcher images={{...}} thumbnails={{...}} thumbnailPosition="top" classes={{...}} app={{...}} viewerThumbnailsOnly={false} arrows={true} indicators={false} loadingThumbnailProps={{...}} imageProps={{...}} reactPinchZoomPanOptions={{...}} autoplay={false} direction="incremental" interval={3000} infinite={false} slidesToShow={1} inset={0} slideSpacing={0} swipeabeViewsProps={{...}}>
             <div className="RSFImageSwitcher-root-164" style={[undefined]}>
               <div className="RSFImageSwitcher-swipeWrap-165">
-                <ReactSwipableView index={0} onChangeIndex={[Function: onChangeIndex]} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
-                  <div style={{...}} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
+                <ReactSwipableView index={0} direction="incremental" interval={3000} onChangeIndex={[Function: onChangeIndex]} slideStyle={{...}} style={{...}} animateHeight={false} animateTransitions={true} axis="x" disabled={false} disableLazyLoading={false} enableMouseEvents={false} hysteresis={0.6} ignoreNativeScroll={false} threshold={5} springConfig={{...}} resistance={false}>
+                  <div style={{...}} direction="incremental" interval={3000} onTouchStart={[Function]} onTouchEnd={[Function]} onScroll={[Function]}>
                     <div style={{...}} className="react-swipeable-view-container">
                       <div style={{...}} className={[undefined]} aria-hidden={false} data-swipeable="true">
-                        <div className="RSFImageSwitcher-imageWrap-166">
+                        <div style={[undefined]} className="RSFImageSwitcher-imageWrap-166">
                           <WithStyles(inject-Image) notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true}>
                             <inject-Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}}>
                               <Image notFoundSrc={[undefined]} src="/a.jpg" alt={[undefined]} onLoad={[Function]} contain={true} classes={{...}} amp={false} quality={{...}} fill={false} lazy={false} lazyOffset={100} optimize={{...}}>
@@ -1188,9 +1188,9 @@ exports[`ImageSwitcher should render thumbnails on top 1`] = `
                 <div className="field">
                   <label className="RSFImageSwitcher-thumbsTitle-167" />
                 </div>
-                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} orientation="horizontal" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}}>
-                  <inject-TabsRow-with-app imageProps={{...}} centered={true} orientation="horizontal" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
-                    <TabsRow imageProps={{...}} centered={true} orientation="horizontal" initialSelectedIdx={0} onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
+                <WithStyles(inject-TabsRow-with-app) classes={{...}} imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="horizontal" onTabChange={[Function: onTabChange]} items={{...}}>
+                  <inject-TabsRow-with-app imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="horizontal" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}}>
+                    <TabsRow imageProps={{...}} centered={true} initialSelectedIdx={0} orientation="horizontal" onTabChange={[Function: onTabChange]} items={{...}} classes={{...}} app={{...}} variant="scrollable">
                       <WithStyles(Tabs) value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-224 RSFImageSwitcher-tabsRowRoot-193" classes={{...}}>
                         <Tabs value={0} onChange={[Function]} indicatorColor="secondary" variant="scrollable" className="RSFTabsRow-root-224 RSFImageSwitcher-tabsRowRoot-193" theme={{...}} classes={{...}} centered={false} component="div" fullWidth={false} scrollable={false} ScrollButtonComponent={[Function: WithStyles]} scrollButtons="auto" textColor="inherit">
                           <div className="MuiTabs-root-232 RSFTabsRow-root-224 RSFImageSwitcher-tabsRowRoot-193 RSFTabsRow-root-224 RSFImageSwitcher-tabsRowRoot-193" variant="scrollable">
