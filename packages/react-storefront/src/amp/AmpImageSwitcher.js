@@ -308,7 +308,7 @@ export default class AmpImageSwitcher extends Component {
                 <Video src="{{src}}" layout="fill" alt="{{alt}}" />
                 {'{{/video}}'}
                 {'{{^video}}'}
-                <amp-img src="{{.}}" layout="fill" alt="test" />
+                <amp-img src="{{src}}" layout="fill" alt="{{alt}}" />
                 {'{{/video}}'}
                 {'{{/images}}'}
               </Carousel>

@@ -157,7 +157,7 @@ exports[`ImageSwitcher should render AmpImageSwitcher when amp=true 1`] = `
                                           </WithStyles(inject-Video)>
                                           {{/video}}
                                           {{^video}}
-                                          <amp-img src="{{.}}" layout="fill" alt="test" />
+                                          <amp-img src="{{src}}" layout="fill" alt="{{alt}}" />
                                           {{/video}}
                                           {{/images}}
                                         </amp-carousel>
@@ -246,7 +246,7 @@ exports[`ImageSwitcher should render AmpImageSwitcher without product colors 1`]
                                           </WithStyles(inject-Video)>
                                           {{/video}}
                                           {{^video}}
-                                          <amp-img src="{{.}}" layout="fill" alt="test" />
+                                          <amp-img src="{{src}}" layout="fill" alt="{{alt}}" />
                                           {{/video}}
                                           {{/images}}
                                         </amp-carousel>
