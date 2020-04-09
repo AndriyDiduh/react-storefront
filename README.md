@@ -76,6 +76,14 @@ yarn release
 
 ## Changelog
 
+### 6.82.2 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.1...v6.82.2)
+
+- Fixed service worker bug related to an empty referrer
+
+### 6.82.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.0...v6.82.1)
+
+- Fixed AMP images in carousel
+
 ### 6.82.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.81.1...v6.82.0)
 
 - Added all features of `Carousel` to `ImageSwitcher`

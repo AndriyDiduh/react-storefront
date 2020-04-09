@@ -360,9 +360,10 @@ function isAmp(url) {
  * @return {Boolean}
  */
 function shouldServeHTMLFromCache(url, event) {
+  const referrer = event.request.referrer || ''
   return (
     '{{serveSSRFromCache}}' === 'true' ||
-    (event.request.referrer != null && isAmp(new URL(event.request.referrer))) ||
+    (referrer.length > 0 && isAmp(new URL(referrer))) ||
     /\?source=pwa/.test(url.search) ||
     /(\?|&)powerlink/.test(url.search)
   )
