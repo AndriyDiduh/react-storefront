@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.82.3 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.2...v6.82.3)
+
+- Fixed ImageSwitcher's `infinite` quick turnaround bug
+
 ### 6.82.2 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.1...v6.82.2)
 
 - Fixed service worker bug related to an empty referrer

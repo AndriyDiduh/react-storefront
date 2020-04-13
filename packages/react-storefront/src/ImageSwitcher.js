@@ -6,6 +6,7 @@ import React, { Fragment, Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import SwipeableViews from 'react-swipeable-views'
 import { autoPlay, virtualize } from 'react-swipeable-views-utils'
+import { mod } from 'react-swipeable-views-core'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
@@ -29,11 +30,6 @@ import set from 'lodash/set'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 const VirtualizeSwipeableViews = virtualize(SwipeableViews)
 const AutoPlayVirtualizeSwipeableViews = autoPlay(VirtualizeSwipeableViews)
-
-function mod(n, m) {
-  const q = n % m
-  return q < 0 ? q + m : q
-}
 
 const paletteIconTextColor = '#77726D'
 
@@ -606,11 +602,22 @@ export default class ImageSwitcher extends Component {
     }
   }
 
-  renderSlide = ({ style, index, src, alt, video, poster, zoomSrc, zoomWidth, zoomHeight }) => {
+  renderSlide = ({
+    key,
+    style,
+    index,
+    src,
+    alt,
+    video,
+    poster,
+    zoomSrc,
+    zoomWidth,
+    zoomHeight
+  }) => {
     const { notFoundSrc, imageProps, classes, magnifyProps } = this.props
     const imageOnLoad = idx => (idx === 0 ? this.onFullSizeImagesLoaded : () => {})
     return (
-      <div key={index} style={style} className={classes.imageWrap}>
+      <div key={key} style={style} className={classes.imageWrap}>
         {video ? (
           <Video src={src} alt={alt} poster={poster} />
         ) : zoomSrc && zoomWidth && zoomHeight ? (
@@ -650,6 +657,7 @@ export default class ImageSwitcher extends Component {
     for (let i = 0; i < slidesToShow; i++) {
       slide.push(
         this.renderSlide({
+          key,
           index: i,
           ...images[baseindex + i]
         })
@@ -726,7 +734,7 @@ export default class ImageSwitcher extends Component {
     Tag = infinite && autoplay ? AutoPlayVirtualizeSwipeableViews : Tag
 
     const tagProps = {
-      index: this.getSelectedIndex(),
+      index: this.state.selectedIndex,
       direction,
       interval,
       onChangeIndex: i => this.setState({ selectedIndex: i }),
@@ -743,7 +751,7 @@ export default class ImageSwitcher extends Component {
     if (infinite) {
       tagProps.slideRenderer = this.slideRenderer
     } else {
-      tagProps.children = images.map((image, i) => this.renderSlide({ ...image, index: i }))
+      tagProps.children = images.map((image, i) => this.renderSlide({ ...image, key: i, index: i }))
     }
 
     const slideCount = images.length
