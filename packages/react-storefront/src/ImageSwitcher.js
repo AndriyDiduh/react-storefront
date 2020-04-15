@@ -737,7 +737,11 @@ export default class ImageSwitcher extends Component {
       index: this.state.selectedIndex,
       direction,
       interval,
-      onChangeIndex: i => this.setState({ selectedIndex: i }),
+      onChangeIndex: i => {
+        // Limit to single index change
+        const delta = Math.sign(i - this.state.selectedIndex)
+        this.setState({ selectedIndex: this.state.selectedIndex + delta })
+      },
       slideStyle: {
         padding: `0 ${slideSpacing}px`,
         overflow: 'hidden'

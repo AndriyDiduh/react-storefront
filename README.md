@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.82.4 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.3...v6.82.4)
+
+- Fixed mobile ImageSwitcher swiping issue which skipped slides
+
 ### 6.82.3 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.2...v6.82.3)
 
 - Fixed ImageSwitcher's `infinite` quick turnaround bug
