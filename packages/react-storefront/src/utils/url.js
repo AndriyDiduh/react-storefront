@@ -54,7 +54,7 @@ export function absoluteURL(url, { protocol, hostname, port, pathname } = {}) {
       url = `${pathname}/${url}`
     }
 
-    if (port === '80' || port === '443' || port == null) {
+    if (port === '80' || port === '443' || port === '' || port == null) {
       port = ''
     } else {
       port = ':' + port

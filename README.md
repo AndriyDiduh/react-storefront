@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.82.5 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.4...v6.82.5)
+
+- Check for empty port when creating an absolute URL
+
 ### 6.82.4 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.3...v6.82.4)
 
 - Fixed mobile ImageSwitcher swiping issue which skipped slides
