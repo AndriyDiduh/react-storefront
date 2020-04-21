@@ -424,7 +424,17 @@ export default class ImageSwitcher extends Component {
     /**
      * Additional props to be passed on to the react-swipeable-views component
      */
-    swipeableViewsProps: PropTypes.object
+    swipeableViewsProps: PropTypes.object,
+
+    /**
+     * Additional props to be passed on to "previous" IconButton
+     */
+    prevButtonProps: PropTypes.object,
+
+    /**
+     * Additional props to be passed on to "next" IconButton
+     */
+    nextButtonProps: PropTypes.object,
   }
 
   static defaultProps = {
@@ -446,7 +456,13 @@ export default class ImageSwitcher extends Component {
     slidesToShow: 1,
     inset: 0,
     slideSpacing: 0,
-    swipeabeViewsProps: {}
+    swipeabeViewsProps: {},
+    prevButtonProps: {
+      'aria-label': 'previous'
+    },
+    nextButtonProps: {
+      'aria-label': 'next'
+    }
   }
 
   state = {
@@ -688,6 +704,8 @@ export default class ImageSwitcher extends Component {
       slideSpacing,
       swipeableViewsProps,
       magnifyProps,
+      prevButtonProps,
+      nextButtonProps,
       thumbnailPosition
     } = this.props
 
@@ -776,6 +794,7 @@ export default class ImageSwitcher extends Component {
                 <IconButton
                   className={classnames(classes.arrow, classes.leftArrow)}
                   onClick={() => this.setState({ selectedIndex: this.state.selectedIndex - 1 })}
+                  {...prevButtonProps}
                 >
                   <ChevronLeft classes={{ root: classes.icon }} />
                 </IconButton>
@@ -784,6 +803,7 @@ export default class ImageSwitcher extends Component {
                 <IconButton
                   className={classnames(classes.arrow, classes.rightArrow)}
                   onClick={() => this.setState({ selectedIndex: this.state.selectedIndex + 1 })}
+                  {...nextButtonProps}
                 >
                   <ChevronRight classes={{ root: classes.icon }} />
                 </IconButton>

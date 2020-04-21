@@ -66,7 +66,12 @@ export default class FilterButton extends Component {
     /**
      * Text for the clear link.  Defaults to "clear all".
      */
-    clearLinkText: PropTypes.string
+    clearLinkText: PropTypes.string,
+
+    /**
+     * Props for the underlying `Drawer` component
+     */
+    drawerWrapperProps: PropTypes.object
   }
 
   static defaultProps = {
@@ -96,6 +101,7 @@ export default class FilterButton extends Component {
       drawerProps,
       hideClearLink,
       clearLinkText,
+      drawerWrapperProps,
       ...props
     } = this.props
     const { open, mountDrawer } = this.state
@@ -140,6 +146,7 @@ export default class FilterButton extends Component {
             }
             open={open}
             onRequestClose={this.toggleOpen.bind(this, false)}
+            {...drawerWrapperProps}
           >
             {mountDrawer && (
               <Filter model={model} onViewResultsClick={this.onViewResultsClick} {...drawerProps} />

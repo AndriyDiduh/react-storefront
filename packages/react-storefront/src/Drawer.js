@@ -167,6 +167,7 @@ export default class Drawer extends Component {
               className={classes.closeButton}
               onClick={this.closeDrawer}
               style={{ display: open ? '' : 'none' }}
+              aria-label="close"
               on={
                 ampBindClosed
                   ? `tap:AMP.setState({ ${ampStateId}: { ${ampBindClosed}: true }})`
