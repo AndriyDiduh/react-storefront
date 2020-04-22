@@ -90,7 +90,11 @@ export default class TabPanel extends Component {
     /**
      * On change callback
      */
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    /**
+    * Props for underlying `Tabs` component
+    */
+    tabsProps: PropTypes.object
   }
 
   static defaultProps = {
@@ -108,7 +112,7 @@ export default class TabPanel extends Component {
 
   render() {
     const { selected } = this.state
-    const { children, classes, app, ampStateId, ampStateProperty, scrollable } = this.props
+    const { children, classes, app, ampStateId, ampStateProperty, scrollable, tabsProps } = this.props
     const { amp } = app
 
     let panels = []
@@ -191,6 +195,7 @@ export default class TabPanel extends Component {
           classes={{
             indicator: classnames({ [classes.ampTabIndicator]: amp })
           }}
+          {...tabsProps}
         >
           {tabs}
         </Tabs>

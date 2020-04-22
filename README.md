@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.82.7 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.6...v6.82.7)
+
+- Add `tabsProps` to `TabPanel`.
+
 ### 6.82.6 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.5...v6.82.6)
 
 - Add `aria-label` attribute to `Drawer` and `ImageSwitcher`.
