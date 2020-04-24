@@ -895,7 +895,7 @@ describe('Router:Node', function() {
         .get('/p/:id', fromServer(secondHandler))
 
       const headers = {
-        'xdn-route': '8'
+        'x-xdn-route': '8'
       }
 
       const request = {
