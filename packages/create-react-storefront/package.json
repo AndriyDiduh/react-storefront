@@ -1,6 +1,6 @@
 {
   "name": "create-react-storefront",
-  "version": "6.82.7",
+  "version": "6.82.8",
   "description": "A CLI for creating React Storefront apps.",
   "main": "index.js",
   "dependencies": {
