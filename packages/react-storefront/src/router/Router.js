@@ -504,7 +504,7 @@ export default class Router extends EventEmitter {
     if (routeIndex != null) {
       // route passed in from the edge
       const route = this.routes[parseInt(routeIndex)]
-      const params = route.path.match(path)
+      const params = route ? route.path.match(path) : {}
       return { match: route, params: { ...params, ...query } }
     } else {
       // no route passed in from the edge

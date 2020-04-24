@@ -911,6 +911,40 @@ describe('Router:Node', function() {
       await router.runAll(request, response)
       expect(secondHandler).toHaveBeenCalledWith({ id: '1' }, request, response)
     })
+
+    it('should handle an incorrect index', async () => {
+      const firstHandler = jest.fn()
+      const secondHandler = jest.fn()
+
+      const router = new Router()
+        .get('/s/:id', fromServer(firstHandler))
+        .get('/p/:id', fromServer(secondHandler))
+
+      const headers = {
+        'xdn-route': '99'
+      }
+
+      const request = {
+        headers: {
+          get(name) {
+            return headers[name]
+          }
+        },
+        path: '/p/1'
+      }
+
+      const response = new Response()
+
+      let error
+
+      try {
+        await router.runAll(request, response)
+      } catch (e) {
+        error = e
+      }
+
+      expect(error).toBeUndefined()
+    })
   })
 
   afterAll(() => {
