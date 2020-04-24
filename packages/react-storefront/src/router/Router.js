@@ -499,13 +499,23 @@ export default class Router extends EventEmitter {
     let params
     let { path, query, method = 'GET' } = request
 
-    method = method.toUpperCase()
+    const routeIndex = request.headers && request.headers.get('xdn-route')
 
-    const match = this.routes
-      .filter(route => method === route.method)
-      .find(route => (params = route.path.match(path)))
+    if (routeIndex != null) {
+      // route passed in from the edge
+      const route = this.routes[parseInt(routeIndex)]
+      const params = route.path.match(path)
+      return { match: route, params: { ...params, ...query } }
+    } else {
+      // no route passed in from the edge
+      method = method.toUpperCase()
 
-    return { match, params: { ...params, ...query } }
+      const match = this.routes
+        .filter(route => method === route.method)
+        .find(route => (params = route.path.match(path)))
+
+      return { match, params: { ...params, ...query } }
+    }
   }
 
   /**

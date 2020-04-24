@@ -885,6 +885,34 @@ describe('Router:Node', function() {
     })
   })
 
+  describe('with xdn-route header', () => {
+    it('should use the route with index indicated by xdn-route', async () => {
+      const firstHandler = jest.fn()
+      const secondHandler = jest.fn()
+
+      const router = new Router()
+        .get('/s/:id', fromServer(firstHandler))
+        .get('/p/:id', fromServer(secondHandler))
+
+      const headers = {
+        'xdn-route': '8'
+      }
+
+      const request = {
+        headers: {
+          get(name) {
+            return headers[name]
+          }
+        },
+        path: '/p/1'
+      }
+
+      const response = new Response()
+      await router.runAll(request, response)
+      expect(secondHandler).toHaveBeenCalledWith({ id: '1' }, request, response)
+    })
+  })
+
   afterAll(() => {
     jest.unmock('../../src/router/serviceWorker')
   })
