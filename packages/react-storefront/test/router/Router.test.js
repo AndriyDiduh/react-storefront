@@ -886,7 +886,7 @@ describe('Router:Node', function() {
   })
 
   describe('with xdn-route header', () => {
-    it('should use the route with index indicated by xdn-route', async () => {
+    it('should use the route with index indicated by x-xdn-route', async () => {
       const firstHandler = jest.fn()
       const secondHandler = jest.fn()
 
