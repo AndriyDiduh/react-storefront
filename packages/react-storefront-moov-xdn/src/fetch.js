@@ -281,6 +281,9 @@ export default function fetch(url, options = {}, qsOptions) {
     req.on('error', err => {
       reject(err)
     })
+    req.on('abort', () => {
+      reject(new Error('The fetch has been aborted, likely due to a timeout.'))
+    })
 
     // do not break request when we have no data
     if (body) {
