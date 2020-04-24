@@ -78,7 +78,7 @@ yarn release
 
 ### 6.83.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.8...v6.83.0)
 
-- Added the ability for the Moovweb XDN to pass in a route index from the edge using the `xdn-route` header.
+- Added the ability for the Moovweb XDN to pass in a route index from the edge using the `x-xdn-route` header.
 
 ### 6.82.8 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.7...v6.82.8)
 
