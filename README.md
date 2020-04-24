@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.83.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.8...v6.83.0)
+
+- Added the ability for the Moovweb XDN to pass in a route index from the edge using the `xdn-route` header.
+
 ### 6.82.8 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.7...v6.82.8)
 
 - Added handling for fetch abort events to immediately reject the promise when a request is aborted. This will help conserve server resources that would otherwise be taken up by aborted requests that continue on until the worker times out.
