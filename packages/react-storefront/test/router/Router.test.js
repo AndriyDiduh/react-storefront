@@ -945,6 +945,32 @@ describe('Router:Node', function() {
 
       expect(error).toBeUndefined()
     })
+
+    it('should fall back to matching when x-xdn-router is invalid', async () => {
+      const firstHandler = jest.fn()
+      const secondHandler = jest.fn()
+
+      const router = new Router()
+        .get('/s/:id', fromServer(firstHandler))
+        .get('/p/:id', fromServer(secondHandler))
+
+      const headers = {
+        'x-xdn-route': 'foo'
+      }
+
+      const request = {
+        headers: {
+          get(name) {
+            return headers[name]
+          }
+        },
+        path: '/p/1'
+      }
+
+      const response = new Response()
+      await router.runAll(request, response)
+      expect(secondHandler).toHaveBeenCalledWith({ id: '1' }, request, response)
+    })
   })
 
   afterAll(() => {
