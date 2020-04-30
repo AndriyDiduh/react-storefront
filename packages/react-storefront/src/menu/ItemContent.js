@@ -26,7 +26,7 @@ export default class ItemContent extends Component {
       contents = itemContentRenderer(item, leaf)
     }
 
-    if (contents) {
+    if (contents || contents === null) {
       return contents
     } else if (leaf) {
       return (
