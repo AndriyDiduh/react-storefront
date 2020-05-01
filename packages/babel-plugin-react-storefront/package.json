@@ -5,13 +5,17 @@
   "author": "Moovweb",
   "license": "Apache-2.0",
   "dependencies": {
-    "babel-core": "^6.26.0"
+    "babel-core": "^6.26.0",
+    "snyk": "^1.316.1"
   },
   "scripts": {
     "test": "babel test/test.js --out-file test/out.js",
-    "link": "npm link; yarn link"
+    "link": "npm link; yarn link",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0"
-  }
+  },
+  "snyk": true
 }
