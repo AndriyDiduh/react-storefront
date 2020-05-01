@@ -6,7 +6,8 @@
   "license": "Apache-2.0",
   "main": "index.js",
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "snyk": "^1.316.1"
   },
   "peerDependencies": {
     "puppeteer": "^1.19.0"
@@ -19,6 +20,9 @@
     "test": "jest --coverage --collectCoverageFrom=smoke-test-reporter.js test/*",
     "ci:smoke": "jest ./default-smoke.test.js --reporters=default --reporters=./smoke-test-reporter.js",
     "link": "npm link; yarn link",
-    "local": "RSF_SMOKE_TEST_URL=http://localhost:8080 RSF_SMOKE_TEST_HEADLESS=false jest ./default-smoke.test.js"
-  }
+    "local": "RSF_SMOKE_TEST_URL=http://localhost:8080 RSF_SMOKE_TEST_HEADLESS=false jest ./default-smoke.test.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
