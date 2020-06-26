@@ -89,6 +89,17 @@ describe('Server', () => {
       expect(exported.MOOV_PWA_RESPONSE.headers.link).toBe('</pwa/main.js>; rel=preload; as=script')
     })
 
+    it('should append prefetch headers', async () => {
+      global.env.path = '/test'
+      request = new Request()
+      response = new Response(request)
+      response.set('link', '</foo.js>; rel=preload; as=script')
+      await new Server({ theme, model, router, blob, globals, App }).serve(request, response)
+      expect(exported.MOOV_PWA_RESPONSE.headers.link).toBe(
+        '</pwa/main.js>; rel=preload; as=script, </foo.js>; rel=preload; as=script'
+      )
+    })
+
     it('should render scripts', async () => {
       global.env.path = '/test'
       request = new Request()

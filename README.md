@@ -76,6 +76,10 @@ yarn release
 
 ## Changelog
 
+### 6.83.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.83.0...v6.83.1)
+
+- Added handling for appending `link` headers to existing preload headers
+
 ### 6.83.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.82.8...v6.83.0)
 
 - Added the ability for the Moovweb XDN to pass in a route index from the edge using the `x-xdn-route` header.

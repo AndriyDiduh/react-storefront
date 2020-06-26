@@ -186,7 +186,14 @@ export default class Server {
       // Set prefetch headers so that our scripts will be fetched
       // and loaded as fast as possible
       if (this.sendPreloadHeaders) {
-        response.set('link', scripts.map(renderPreloadHeader).join(', '))
+        const linkHeader = response.get('link')
+        const preloadHeader = scripts.map(renderPreloadHeader)
+
+        // append any existing `link` header
+        if (linkHeader) {
+          preloadHeader.push(linkHeader)
+        }
+        response.set('link', preloadHeader.join(', '))
       }
 
       html = `
